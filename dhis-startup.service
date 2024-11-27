@@ -1,0 +1,13 @@
+[Unit]
+Description=Start DHIS2 Tomcat Server
+After=newtork.target
+
+[Service]
+User=dhis
+Group=dhis
+ExecStart=/home/dhis/tomcat-gbv/bin/startup.sh
+WorkingDirectory=/home/dhis/tomcat-gbv/bin
+Restart=always
+
+[install]
+WantedBy=multi-user.target
