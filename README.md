@@ -24,13 +24,12 @@
     sudo systemctl status dhis-gbv-startup.service
 ```
 
-- Reboot once to test the automatic 
+- Reboot once to test the automatic startup
 
 ```bash
     sudo reboot
 ```
 
-There are to script files
 
 ## Install this to allow dependency
 

@@ -6,7 +6,7 @@ BACKUP_DIR="/opt/backups"
 REMOTE_USER="boniface"
 REMOTE_HOST="xx.xxx.xxx.xx"
 REMOTE_PORT="22"
-REMOTE_DIR="/tmp/backups/ppms"
+REMOTE_DIR="/tmp/backups/jphes"
 USER_PASSWORD="xxxxx"
 
 
