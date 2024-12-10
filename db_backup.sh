@@ -11,28 +11,22 @@ DHIS_PASSWORD=""
 DATE=$(date +"%Y-%M-%d")
 OUTPUT_FILE="dhis2_dump_${DATE}.sql.gz"
 LOG_FILE="/var/log/dhis2_backup_${DATE}.log"
+EXLUDED_TABLES="analytics_*"
 
-exec > > (tee -a"$LOG_FILE") 2>$1
+# exec > >(tee -a "$LOG_FILE") 2>&1
+# Above commented out because of error
+
 
 export PGPASSWORD=$DB_PASSWORD
 
-if ! curl -U "$DHIS_USER:$DHIS_PASSWORD" "localhost:$DHISPORT/api/40/maintenance?analyticsTableClear=true" -X POST ; then
-    echo "Error clearing analytics"
-    exit 1
-fi
 
-# wait for 3  minutes to clear the analytics
-sleep 180
+
+# # wait for 3  minutes to clear the analytics
+# sleep 180
 
 # added -h 127.0.0.1 to overcome peer authentication failing
-if ! pg_dump -U $DB_USER -d $DB_NAME -h 127.0.0.1 | gzip > /opt/backups/$OUTPUT_FILE; then
+if ! pg_dump -U $DB_USER -d $DB_NAME -h 127.0.0.1 --exclude-table=$EXLUDED_TABLES | gzip > /opt/backups/$OUTPUT_FILE; then
     echo "Error Backing up the database"
-    exit 1
-fi
-
-
-if ! curl -U "$DHIS_USER:$DHIS_PASSWORD" "localhost:$DHISPORT/api/40/resourceTables/analytics" -X POST ; then
-    echo "Error Running analytics"
     exit 1
 fi
 
