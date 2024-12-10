@@ -4,10 +4,6 @@ DB_NAME="dhis2"
 DB_USER="dhis"
 DB_PASSWORD="xxxxxx"
 
-DHISPORT=8080
-DHIS_USER=""
-DHIS_PASSWORD=""
-
 DATE=$(date +"%Y-%M-%d")
 OUTPUT_FILE="dhis2_dump_${DATE}.sql.gz"
 LOG_FILE="/var/log/dhis2_backup_${DATE}.log"
@@ -19,10 +15,6 @@ EXLUDED_TABLES="analytics_*"
 
 export PGPASSWORD=$DB_PASSWORD
 
-
-
-# # wait for 3  minutes to clear the analytics
-# sleep 180
 
 # added -h 127.0.0.1 to overcome peer authentication failing
 if ! pg_dump -U $DB_USER -d $DB_NAME -h 127.0.0.1 --exclude-table=$EXLUDED_TABLES | gzip > /opt/backups/$OUTPUT_FILE; then
