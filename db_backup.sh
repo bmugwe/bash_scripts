@@ -4,7 +4,7 @@ DB_NAME="dhis2"
 DB_USER="dhis"
 DB_PASSWORD="xxxxxx"
 
-DATE=$(date +"%Y-%M-%d")
+DATE=$(date +"%Y-%m-%d")
 OUTPUT_FILE="dhis2_dump_${DATE}.sql.gz"
 LOG_FILE="/var/log/dhis2_backup_${DATE}.log"
 EXLUDED_TABLES="analytics_*"
